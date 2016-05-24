@@ -21,6 +21,7 @@ this should produce
 
     usage: mapconfigtest
       -?,--help      print this message
+      -t,--trusted <arg>   trusted interface
       -v,--version   print version
       
 Executing with no options should start the embedded HazelcastInstance and try to invoke the map request that is failing. Halting the process *should* invoke the correct shutdown hooks to attempt a clean shutdown
@@ -76,6 +77,13 @@ Executing with no options should start the embedded HazelcastInstance and try to
     INFO: [192.168.130.236]:5701 [dev_docker] [3.6.2] Running shutdown hook... Current state: ACTIVE
     2016-05-24 10:24:38,678 INFO  [Thread-1] net.parttimepolymath.Server: Server close ends
 
+## Running with Docker
 
+You will notice when you check out this repository that there is a Docker folder containing a *Dockerfile*, which you may find convenient for running several instances of the test.  From the commandline, assuming you have Docker installed and your environment is correctly configured:
 
+    cd Docker
+    docker build -t test/mapstoreconfigtest .
+    
+after quite a bit of grinding, the image will be available for you to execute. Note that this docker image is built on top of Centos 7, pulls a Java 8 JDK from Oracle, and finally pulls the 1.1 release of this tool from my private Artifactory. Getting your own build of this tool onto the Docker image is left as an exercise for the student. To run an instance:
 
+    docker run test/mapstoreconfigtest
