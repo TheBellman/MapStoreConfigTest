@@ -10,6 +10,25 @@
     <name>mapconfigtest</name>
     <url>http://maven.apache.org</url>
 
+    <scm>
+        <connection>git@github.com:TheBellman/MapStoreConfigTest.git</connection>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>ip-172-31-6-67-releases</name>
+            <url>http://54.209.160.169:8081/artifactory/libs-release-local</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>ip-172-31-6-67-snapshots</name>
+            <url>http://54.209.160.169:8081/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <compileSource>1.8</compileSource>
@@ -79,6 +98,16 @@
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+                <version>1.9.4</version>
+                <configuration>
+                    <connectionType>connection</connectionType>
+                    <tag>${project.artifactId}-${project.version}</tag>
                 </configuration>
             </plugin>
 
