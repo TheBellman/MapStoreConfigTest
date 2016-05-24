@@ -1,5 +1,6 @@
 package net.parttimepolymath;
 
+import com.google.common.base.Strings;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -30,6 +31,7 @@ public class MapTest {
         Options options = new Options();
         options.addOption("?", "help", false, "print this message");
         options.addOption("v", "version", false, "print version");
+        options.addOption("t", "trusted", true, "trusted interface");
 
         CommandLineParser parser = new PosixParser();
         CommandLine cmd;
@@ -40,7 +42,7 @@ public class MapTest {
             } else if (cmd.hasOption('v')) {
                 doVersion();
             } else {
-                executeServer();
+                executeServer(cmd.getOptionValue('t'));
             }
         } catch (ParseException ex) {
             doHelp(options);
@@ -49,9 +51,9 @@ public class MapTest {
         }
     }
 
-    private static void executeServer() {
+    private static void executeServer(String trusted) {
 
-        try (Server instance = new Server()) {
+        try (Server instance = new Server(Strings.isNullOrEmpty(trusted) ? "172.17.0.*" : trusted)) {
             instance.start();
 
             Runtime.getRuntime().addShutdownHook(new Thread() {

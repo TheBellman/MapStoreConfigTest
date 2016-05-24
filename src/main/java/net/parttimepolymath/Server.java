@@ -28,13 +28,13 @@ public class Server implements AutoCloseable {
     private final QueueRepository queueRepository = new QueueRepositoryImpl();
     private final HazelcastInstanceFactory hazelcastInstanceFactory;
 
-    public Server() throws Exception {
-        LOG.info("Server construction starts");
+    public Server(String trustedInterface) throws Exception {
+        LOG.info("Server construction starts with trustedInterface = {}", trustedInterface);
 
         /*
          * note that this is definitely overkill, but I am emulating the Spring wiring that set's up the factory bean, and in turn provides the (single) HazelcastInstance
          */
-        hazelcastInstanceFactory = new HazelcastInstanceFactory("dev_docker", "letmein", 7200, "127.0.0.*,172.17.0.*", 5701, 54327, "224.2.2.3");
+        hazelcastInstanceFactory = new HazelcastInstanceFactory("dev_docker", "letmein", 7200, trustedInterface, 5701, 54327, "224.2.2.3");
         HazelcastInstance hazelcastInstance = hazelcastInstanceFactory.getObject();
 
         /*
