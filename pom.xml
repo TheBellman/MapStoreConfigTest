@@ -8,10 +8,10 @@
     <packaging>jar</packaging>
 
     <name>mapconfigtest</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/TheBellman/MapStoreConfigTest.git</url>
 
     <scm>
-        <connection>git@github.com:TheBellman/MapStoreConfigTest.git</connection>
+        <connection>scm:git:git@github.com:TheBellman/MapStoreConfigTest.git</connection>
     </scm>
 
     <distributionManagement>
