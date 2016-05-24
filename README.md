@@ -84,6 +84,9 @@ You will notice when you check out this repository that there is a Docker folder
     cd Docker
     docker build -t test/mapstoreconfigtest .
     
-after quite a bit of grinding, the image will be available for you to execute. Note that this docker image is built on top of Centos 7, pulls a Java 8 JDK from Oracle, and finally pulls the 1.1 release of this tool from my private Artifactory. Getting your own build of this tool onto the Docker image is left as an exercise for the student. To run an instance:
+after quite a bit of grinding, the image will be available for you to execute. Note that this docker image is built on top of Centos 7, pulls a Java 8 JDK from Oracle, and finally pulls the 1.1 release of this tool from my private Artifactory. Getting your own build of this tool onto the Docker image is left as an exercise for the student. To run instances:
 
-    docker run test/mapstoreconfigtest
+    docker run --name test1 test/mapstoreconfigtest
+    docker run --name test2 test/mapstoreconfigtest
+    
+halting the Docker process cleanly closes the running instance.
