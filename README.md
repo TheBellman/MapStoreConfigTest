@@ -13,8 +13,8 @@ This assumes Java 8 (I built with 1.8.0_51-b16 on Mac OS), and Maven 3.3.3 or be
 
 this should produce
 
-    target/mapconfigtest-1.0-SNAPSHOT-jar-with-dependencies.jar
-    
+    target/mapconfigtest-1.2-SNAPSHOT-jar-with-dependencies.jar
+
 ## Running
 
 *to be completed - I was running inside docker*
@@ -23,7 +23,7 @@ this should produce
       -?,--help      print this message
       -t,--trusted <arg>   trusted interface
       -v,--version   print version
-      
+
 Executing with no options should start the embedded HazelcastInstance and try to invoke the map request that is failing. Halting the process *should* invoke the correct shutdown hooks to attempt a clean shutdown
 
     java -jar target/mapconfigtest-1.0-SNAPSHOT-jar-with-dependencies.jar
@@ -50,7 +50,7 @@ Executing with no options should start the embedded HazelcastInstance and try to
     May 24, 2016 11:24:33 AM com.hazelcast.nio.tcp.nonblocking.NonBlockingIOThreadingModel
     INFO: [192.168.130.236]:5701 [dev_docker] [3.6.2] TcpIpConnectionManager configured with Non Blocking IO-threading model: 3 input threads and 3 output threads
     May 24, 2016 11:24:36 AM com.hazelcast.cluster.impl.MulticastJoiner
-    INFO: [192.168.130.236]:5701 [dev_docker] [3.6.2] 
+    INFO: [192.168.130.236]:5701 [dev_docker] [3.6.2]
 
 
     Members [1] {
@@ -83,10 +83,10 @@ You will notice when you check out this repository that there is a Docker folder
 
     cd Docker
     docker build -t test/mapstoreconfigtest .
-    
+
 after quite a bit of grinding, the image will be available for you to execute. Note that this docker image is built on top of Centos 7, pulls a Java 8 JDK from Oracle, and finally pulls the 1.1 release of this tool from my private Artifactory. Getting your own build of this tool onto the Docker image is left as an exercise for the student. To run instances:
 
     docker run --name test1 test/mapstoreconfigtest
     docker run --name test2 test/mapstoreconfigtest
-    
+
 halting the Docker process cleanly closes the running instance.
